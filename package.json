@@ -1,0 +1,22 @@
+{
+  "name": "spiritual_omnichannel_server",
+  "version": "1.0.0",
+  "description": "omnichannel server ",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon index",
+    "devbabel": "nodemon app.js --exec babel-node",
+    "start": "NODE_ENV=production node index"
+  },
+  "author": "Leader center",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1"
+  }
+}
