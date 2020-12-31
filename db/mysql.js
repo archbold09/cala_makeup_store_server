@@ -1,17 +1,12 @@
-
-let mysql      = require('mysql');
-let connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'dbuser',
-  password : 's3kreee7',
-  database : ''
+const { config } = require("../config");
+const mysql = require("mysql2");
+const pool = mysql.createPool({
+  host: config.dbHost,
+  user: config.dbUser,
+  password: config.dbPassword,
+  database: config.dbName,
 });
 
-connection.connect();
+const connection = pool.promise();
 
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-  if (err) throw err;
-  console.log('The solution is: ', rows[0].solution);
-});
-
-connection.end();
+module.exports = { connection };
