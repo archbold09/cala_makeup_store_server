@@ -15,9 +15,19 @@ class UserService {
     }
   }
 
+  async getUser() {
+    try {
+      const [data,other_data] = await this.connection.query(`SELECT * FROM users WHERE email = '${email}'`);
+      return data
+    } catch (error) {
+      console.log(`Error: ${error}`);
+      return []
+    }
+  }
+
   async loginUser(email) {
     try {
-      const [data,other_data] = await this.connection.query(`SELECT id, email, password FROM users WHERE email = '${email}'`);
+      const [data,other_data] = await this.connection.query(`SELECT * FROM users WHERE email = '${email}'`);
       return data || []
     } catch (error) {
       console.log(`Error: ${error}`);
