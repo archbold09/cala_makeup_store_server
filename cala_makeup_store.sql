@@ -1,27 +1,18 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 25, 2021 at 12:07 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Host: localhost:3306
+-- Generation Time: Jan 26, 2021 at 05:47 PM
+-- Server version: 5.7.32
+-- PHP Version: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `cala_makeup_store`
 --
-CREATE DATABASE IF NOT EXISTS `cala_makeup_store` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `cala_makeup_store`;
 
 -- --------------------------------------------------------
 
@@ -32,9 +23,9 @@ USE `cala_makeup_store`;
 CREATE TABLE `brands` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `state` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -46,10 +37,10 @@ CREATE TABLE `brands` (
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `state` tinyint(4) NOT NULL DEFAULT 1,
+  `state` tinyint(4) NOT NULL DEFAULT '1',
   `slug` varchar(100) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -77,12 +68,55 @@ CREATE TABLE `products` (
   `salePrice` double NOT NULL,
   `purchasePrice` double NOT NULL,
   `image` varchar(200) NOT NULL DEFAULT '''https://source.unsplash.com/user/erondu/1600x900''',
-  `state` tinyint(4) NOT NULL DEFAULT 1,
-  `id_brand` int(11) NOT NULL,
-  `id_subcategory` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `slug` varchar(100) NOT NULL,
+  `state` tinyint(4) NOT NULL DEFAULT '1',
+  `id_brand` int(11) DEFAULT NULL,
+  `id_subcategory` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `salePrice`, `purchasePrice`, `image`, `slug`, `state`, `id_brand`, `id_subcategory`, `created_at`, `updated_at`) VALUES
+(57, 'Broom - Angled', 654.91, 23.91, 'http://dummyimage.com/162x224.png/dddddd/000000', '', 1, NULL, 5, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(58, 'Bread - English Muffin', 174.58, 41.54, 'http://dummyimage.com/198x193.jpg/ff4444/ffffff', '', 1, NULL, 6, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(60, 'Cheese - Mozzarella, Buffalo', 839.06, 92.2, 'http://dummyimage.com/103x141.bmp/dddddd/000000', '', 1, NULL, 1, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(61, 'Ostrich - Fan Fillet', 330.32, 59, 'http://dummyimage.com/168x233.png/5fa2dd/ffffff', '', 1, NULL, 1, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(66, 'Tea Peppermint', 397.9, 28.66, 'http://dummyimage.com/245x229.bmp/cc0000/ffffff', '', 1, NULL, 1, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(67, 'Strawberries - California', 987.4, 88.06, 'http://dummyimage.com/133x219.jpg/ff4444/ffffff', '', 1, NULL, 7, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(72, 'Fish - Halibut, Cold Smoked', 994.38, 73.4, 'http://dummyimage.com/244x114.bmp/cc0000/ffffff', '', 1, NULL, 4, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(73, 'Devonshire Cream', 913.2, 32.75, 'http://dummyimage.com/167x203.bmp/ff4444/ffffff', '', 1, NULL, 4, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(87, 'Arrowroot', 471.88, 32.04, 'http://dummyimage.com/168x115.bmp/dddddd/000000', '', 1, NULL, 6, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(92, 'Chocolate - Milk', 635.68, 5.02, 'http://dummyimage.com/111x204.png/dddddd/000000', '', 1, NULL, 4, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(95, 'Mushroom - Chanterelle Frozen', 852.16, 84.17, 'http://dummyimage.com/248x130.jpg/ff4444/ffffff', '', 1, NULL, 6, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(97, 'Sugar - Sweet N Low, Individual', 244.96, 67.69, 'http://dummyimage.com/229x195.bmp/5fa2dd/ffffff', '', 1, NULL, 4, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(100, 'Apricots - Dried', 212.68, 47.98, 'http://dummyimage.com/224x248.bmp/ff4444/ffffff', '', 1, NULL, 2, '2021-01-26 21:25:56', '2021-01-26 21:25:56'),
+(107, 'Broom - Angled', 654.91, 23.91, 'http://dummyimage.com/162x224.png/dddddd/000000', '', 1, NULL, 5, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(108, 'Bread - English Muffin', 174.58, 41.54, 'http://dummyimage.com/198x193.jpg/ff4444/ffffff', '', 1, NULL, 6, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(110, 'Cheese - Mozzarella, Buffalo', 839.06, 92.2, 'http://dummyimage.com/103x141.bmp/dddddd/000000', '', 1, NULL, 1, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(111, 'Ostrich - Fan Fillet', 330.32, 59, 'http://dummyimage.com/168x233.png/5fa2dd/ffffff', '', 1, NULL, 1, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(116, 'Tea Peppermint', 397.9, 28.66, 'http://dummyimage.com/245x229.bmp/cc0000/ffffff', '', 1, NULL, 1, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(117, 'Strawberries - California', 987.4, 88.06, 'http://dummyimage.com/133x219.jpg/ff4444/ffffff', '', 1, NULL, 7, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(122, 'Fish - Halibut, Cold Smoked', 994.38, 73.4, 'http://dummyimage.com/244x114.bmp/cc0000/ffffff', '', 1, NULL, 4, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(123, 'Devonshire Cream', 913.2, 32.75, 'http://dummyimage.com/167x203.bmp/ff4444/ffffff', '', 1, NULL, 4, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(137, 'Arrowroot', 471.88, 32.04, 'http://dummyimage.com/168x115.bmp/dddddd/000000', '', 1, NULL, 6, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(142, 'Chocolate - Milk', 635.68, 5.02, 'http://dummyimage.com/111x204.png/dddddd/000000', '', 1, NULL, 4, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(145, 'Mushroom - Chanterelle Frozen', 852.16, 84.17, 'http://dummyimage.com/248x130.jpg/ff4444/ffffff', '', 1, NULL, 6, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(147, 'Sugar - Sweet N Low, Individual', 244.96, 67.69, 'http://dummyimage.com/229x195.bmp/5fa2dd/ffffff', '', 1, NULL, 4, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(150, 'Apricots - Dried', 212.68, 47.98, 'http://dummyimage.com/224x248.bmp/ff4444/ffffff', '', 1, NULL, 2, '2021-01-26 21:26:38', '2021-01-26 21:26:38'),
+(154, 'Nantucket Orange Juice', 281.56, 31.44, 'http://dummyimage.com/102x250.png/5fa2dd/ffffff', '', 1, NULL, 1, '2021-01-26 21:29:18', '2021-01-26 21:29:18'),
+(156, 'True - Vue Containers', 594.87, 27.73, 'http://dummyimage.com/242x139.png/cc0000/ffffff', '', 1, NULL, 1, '2021-01-26 21:29:18', '2021-01-26 21:29:18'),
+(159, 'Wine - White, Cooking', 813.41, 98.38, 'http://dummyimage.com/163x145.bmp/cc0000/ffffff', '', 1, NULL, 1, '2021-01-26 21:29:18', '2021-01-26 21:29:18'),
+(166, 'Shrimp - Prawn', 412.7, 82.09, 'http://dummyimage.com/181x134.jpg/5fa2dd/ffffff', '', 1, NULL, 7, '2021-01-26 21:29:18', '2021-01-26 21:29:18'),
+(170, 'Potatoes - Peeled', 382.34, 19.4, 'http://dummyimage.com/227x213.jpg/ff4444/ffffff', '', 1, NULL, 1, '2021-01-26 21:29:18', '2021-01-26 21:29:18'),
+(178, 'Quail - Whole, Bone - In', 922.38, 90.76, 'http://dummyimage.com/241x129.png/dddddd/000000', '', 1, NULL, 1, '2021-01-26 21:29:18', '2021-01-26 21:29:18'),
+(182, 'Sole - Iqf', 871.19, 23.52, 'http://dummyimage.com/133x194.bmp/5fa2dd/ffffff', '', 1, NULL, 1, '2021-01-26 21:29:18', '2021-01-26 21:29:18'),
+(184, 'Cheese - Pont Couvert', 191.83, 15.36, 'http://dummyimage.com/144x198.png/5fa2dd/ffffff', '', 1, NULL, 6, '2021-01-26 21:29:18', '2021-01-26 21:29:18'),
+(193, 'Pate - Cognac', 993.47, 3.9, 'http://dummyimage.com/245x197.jpg/5fa2dd/ffffff', '', 1, NULL, 3, '2021-01-26 21:29:18', '2021-01-26 21:29:18'),
+(199, 'Wine - White, Schroder And Schyl', 480.97, 50.69, 'http://dummyimage.com/204x193.jpg/dddddd/000000', '', 1, NULL, 4, '2021-01-26 21:29:18', '2021-01-26 21:29:18');
 
 -- --------------------------------------------------------
 
@@ -93,11 +127,11 @@ CREATE TABLE `products` (
 CREATE TABLE `sub_categories` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `state` tinyint(4) NOT NULL DEFAULT 1,
+  `state` tinyint(4) NOT NULL DEFAULT '1',
   `slug` varchar(100) NOT NULL,
   `id_category` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -111,7 +145,7 @@ INSERT INTO `sub_categories` (`id`, `name`, `state`, `slug`, `id_category`, `cre
 (4, 'Contornos e iluminadores', 1, 'contornos-iluminadores', 1, '2021-01-22 01:51:12', '2021-01-23 02:11:07'),
 (5, 'Iluminadores', 1, 'iluminadores', 1, '2021-01-22 01:51:12', '2021-01-23 02:11:07'),
 (6, 'Rubores', 1, 'rubores', 1, '2021-01-22 01:51:12', '2021-01-23 02:11:07'),
-(7, 'Colvos', 1, 'colvos', 1, '2021-01-22 01:51:12', '2021-01-23 02:11:07'),
+(7, 'Polvos', 1, 'polvos', 1, '2021-01-22 01:51:12', '2021-01-26 19:44:00'),
 (8, 'Pestaniñas', 1, 'pestaninas', 2, '2021-01-22 01:52:43', '2021-01-23 02:11:07'),
 (9, 'Delineadores', 1, 'delineadores', 2, '2021-01-22 01:52:43', '2021-01-23 02:11:07'),
 (10, 'Pestañas postizas', 1, 'pestanas-postizas', 2, '2021-01-22 01:52:43', '2021-01-23 02:11:07'),
@@ -185,7 +219,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
 
 --
 -- AUTO_INCREMENT for table `sub_categories`
@@ -209,8 +243,3 @@ ALTER TABLE `products`
 --
 ALTER TABLE `sub_categories`
   ADD CONSTRAINT `sub_categories_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
